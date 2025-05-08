@@ -3,7 +3,7 @@ use rand::rngs::StdRng;
 use rand::{Rng, SeedableRng};
 
 #[pyfunction]
-fn simulation(particles: i32, steps: i32, temp: f64, seed: u64) -> Vec<Vec<Vec<f64>>> {
+fn simulation(particles: i32, steps: i32, temp: f64, seed: u64) -> Vec<f64> {
     let mut generator = StdRng::seed_from_u64(seed);
 
     let mut positions: Vec<Vec<f64>> = (0..particles)
@@ -42,7 +42,7 @@ fn simulation(particles: i32, steps: i32, temp: f64, seed: u64) -> Vec<Vec<Vec<f
             .collect();
 
         let new_energy: f64;
-        
+
         if new_positions
             .iter()
             .any(|pos| pos[2] < 0.0)
@@ -51,14 +51,25 @@ fn simulation(particles: i32, steps: i32, temp: f64, seed: u64) -> Vec<Vec<Vec<f
         } else {
             new_energy = calculate_energy(&new_positions, g, m);
         }
-        
+
         if f64::exp(-(new_energy - energy) / temp) > 1.0 - generator.random_range(0.0..1.0) {
             positions = new_positions;
             energy = new_energy;
         }
     }
-
-    vec![vec![vec![0.0]]]
+    
+    let flattened_positions: Vec<Vec<f64>> =
+        positions_all
+            .into_iter()
+            .flat_map(|step| step.into_iter().collect::<Vec<Vec<f64>>>())
+            .collect();
+    
+    let z_coordinates: Vec<f64> = flattened_positions
+        .into_iter()
+        .map(|pos| pos[2])
+        .collect();
+    
+    z_coordinates
 }
 
 fn calculate_energy(positions: &Vec<Vec<f64>>, g: f64, m: f64) -> f64 {
