@@ -1,3 +1,5 @@
+from brazilian_nut_simulation import simulation
+
 def main():
     print("hello world")
 

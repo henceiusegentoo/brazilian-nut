@@ -11,7 +11,9 @@ dependencies = [
 ]
 
 [tool.poetry]
-packages = [{include = "brazilian_nut_wrapper", from = "src"}]
+packages = [
+    {include = "brazilian_nut_wrapper", from = "src"},
+]
 package-mode = false
 
 
