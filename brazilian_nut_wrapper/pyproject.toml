@@ -12,7 +12,7 @@ dependencies = [
 
 [tool.poetry]
 packages = [
-    {include = "brazilian_nut_wrapper", from = "src"},
+    {include = "brazilian_nut_wrapper", from = "src"}
 ]
 package-mode = false
 
