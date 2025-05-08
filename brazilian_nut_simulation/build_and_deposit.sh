@@ -1,3 +1,2 @@
-maturin build
-pip install --upgrade target/wheels/*.whl --target target/output/
-mv target/output/brazilian_nut_simulation/*.so ../brazilian_nut_wrapper/src/brazialian_nut_wrapper/brazilian_nut_simulation.so
+maturin build --release
+mv target/release/*.so ../brazilian_nut_wrapper/brazilian_nut_simulation.so
