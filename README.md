@@ -1,4 +1,4 @@
-Build rust-part using Maturin, build Python part using Poetry. <br>
+Build Rust-part using Maturin, build Python-part using Poetry. <br>
 If you simply want to run the project, the Python part already has a compiled version of the Rust part for Linux. In general, I'd recommend to use this on Linux only because because Rust on Windows is a pain in the ass.
 
 ## How to run
